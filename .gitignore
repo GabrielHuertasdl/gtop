@@ -1,2 +1,18 @@
+# Rust build output
 target/
+**/*.rs.bk
+
+# Packaging artifacts
+*.AppImage
+packaging/appimage/AppDir/
+packaging/aur/pkg/
+packaging/aur/src/
+packaging/aur/*.tar.gz
+packaging/aur/*.pkg.tar.*
+
+# Editors / OS
 *.swp
+*.swo
+.idea/
+.vscode/
+.DS_Store
