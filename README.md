@@ -106,7 +106,7 @@ Each refresh tick, both front ends ask the core collectors for a new snapshot an
 ### Build from source
 
 ```bash
-git clone https://github.com/ghuertas/gtop.git
+git clone https://github.com/GabrielHuertasdl/gtop.git
 cd gtop
 cargo build --release
 ```
