@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=gtop TUI
+Comment=Real-time Linux process manager (terminal)
+Exec=gtop-tui
+Icon=gtop
+Terminal=true
+Type=Application
+Categories=System;Monitor;
+Keywords=process;monitor;system;htop;top;

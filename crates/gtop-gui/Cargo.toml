@@ -1,0 +1,28 @@
+[package]
+name             = "gtop-gui"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "gtop-gui"
+path = "src/main.rs"
+
+[dependencies]
+gtop-core = { path = "../gtop-core" }
+
+anyhow.workspace    = true
+tokio.workspace     = true
+tracing.workspace   = true
+tracing-subscriber.workspace = true
+serde.workspace     = true
+directories.workspace = true
+clap.workspace      = true
+nix.workspace       = true
+
+egui.workspace      = true
+eframe.workspace    = true
+egui_plot.workspace = true
+
+libc = "0.2"

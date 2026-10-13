@@ -1,0 +1,71 @@
+[workspace]
+members = [
+    "crates/gtop-core",
+    "crates/gtop-tui",
+    "crates/gtop-gui",
+]
+resolver = "2"
+
+[workspace.package]
+version      = "0.1.0"
+authors      = ["Gabriel Huertas <gabriel.huertasdl@gmail.com>"]
+edition      = "2021"
+license      = "GPL-3.0"
+repository   = "https://github.com/ghuertas/gtop"
+rust-version = "1.80"
+
+[workspace.dependencies]
+# async
+tokio        = { version = "1", features = ["full"] }
+futures-util = { version = "0.3" }
+
+# errors
+anyhow      = "1"
+thiserror   = "2"
+
+# serde
+serde = { version = "1", features = ["derive"] }
+toml  = "0.8"
+
+# logging
+tracing            = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Linux
+nix    = { version = "0.29", features = ["signal", "process", "resource", "user", "fs"] }
+procfs = "0.17"
+
+# data structures
+ringbuffer = "0.15"
+
+# time
+chrono = { version = "0.4", features = ["serde"] }
+
+# TUI
+ratatui   = "0.29"
+crossterm = { version = "0.28", features = ["event-stream"] }
+
+# GUI
+egui      = "0.31"
+eframe    = { version = "0.31", features = ["default_fonts", "persistence"] }
+egui_plot = "0.31"
+
+# config / paths
+directories = "5"
+
+# string utilities
+unicode-width = "0.2"
+fuzzy-matcher = "0.3"
+
+# CLI
+clap = { version = "4", features = ["derive"] }
+
+[profile.release]
+opt-level     = 3
+lto           = "thin"
+codegen-units = 1
+strip         = "symbols"
+panic         = "abort"
+
+[profile.dev]
+opt-level = 1

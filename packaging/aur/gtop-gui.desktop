@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=gtop
+Comment=Real-time Linux process manager (graphical)
+Exec=gtop-gui
+Icon=gtop
+Terminal=false
+Type=Application
+Categories=System;Monitor;
+Keywords=process;monitor;system;

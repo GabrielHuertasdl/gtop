@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Gtop
+GenericName=System Monitor
+Comment=Real-time Linux process and system monitor
+Exec=gtop-gui
+Icon=gtop
+Terminal=false
+Categories=System;Monitor;Utility;
+Keywords=process;cpu;memory;monitor;system;
+StartupWMClass=gtop-gui

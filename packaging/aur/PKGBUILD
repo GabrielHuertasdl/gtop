@@ -1,0 +1,45 @@
+# Maintainer: Gabriel Huertas <gabriel.huertasdl@gmail.com>
+pkgbase=gtop
+pkgname=('gtop-tui' 'gtop-gui')
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Modern Linux process manager with TUI and GUI interfaces"
+arch=('x86_64')
+url="https://github.com/ghuertas/gtop"
+license=('GPL3')
+makedepends=('rust' 'cargo')
+source=("$pkgbase-$pkgver.tar.gz::$url/archive/v$pkgver.tar.gz")
+sha256sums=('SKIP')
+
+build() {
+    cd "$pkgbase-$pkgver"
+    cargo build --release --workspace
+}
+
+package_gtop-tui() {
+    pkgdesc="gtop TUI interface — real-time process manager for the terminal"
+    depends=()
+    cd "$pkgbase-$pkgver"
+    install -Dm755 "target/release/gtop-tui" "$pkgdir/usr/bin/gtop-tui"
+    install -Dm644 "packaging/aur/gtop-tui.desktop" "$pkgdir/usr/share/applications/gtop-tui.desktop"
+    install -Dm644 "assets/icons/gtop.svg" "$pkgdir/usr/share/icons/hicolor/scalable/apps/gtop.svg"
+    # Shell completions
+    "$pkgdir/usr/bin/gtop-tui" --completions bash > "$srcdir/gtop-tui.bash" 2>/dev/null || true
+    "$pkgdir/usr/bin/gtop-tui" --completions zsh  > "$srcdir/_gtop-tui"     2>/dev/null || true
+    "$pkgdir/usr/bin/gtop-tui" --completions fish > "$srcdir/gtop-tui.fish" 2>/dev/null || true
+    [ -f "$srcdir/gtop-tui.bash" ] && install -Dm644 "$srcdir/gtop-tui.bash" "$pkgdir/usr/share/bash-completion/completions/gtop-tui"
+    [ -f "$srcdir/_gtop-tui"     ] && install -Dm644 "$srcdir/_gtop-tui"     "$pkgdir/usr/share/zsh/site-functions/_gtop-tui"
+    [ -f "$srcdir/gtop-tui.fish" ] && install -Dm644 "$srcdir/gtop-tui.fish" "$pkgdir/usr/share/fish/vendor_completions.d/gtop-tui.fish"
+    # Man page
+    "$pkgdir/usr/bin/gtop-tui" --man | gzip > "$srcdir/gtop-tui.1.gz" 2>/dev/null || true
+    [ -f "$srcdir/gtop-tui.1.gz" ] && install -Dm644 "$srcdir/gtop-tui.1.gz" "$pkgdir/usr/share/man/man1/gtop-tui.1.gz"
+}
+
+package_gtop-gui() {
+    pkgdesc="gtop GUI interface — real-time process manager with graphical interface"
+    depends=()
+    cd "$pkgbase-$pkgver"
+    install -Dm755 "target/release/gtop-gui" "$pkgdir/usr/bin/gtop-gui"
+    install -Dm644 "packaging/aur/gtop-gui.desktop" "$pkgdir/usr/share/applications/gtop-gui.desktop"
+    install -Dm644 "assets/icons/gtop.svg" "$pkgdir/usr/share/icons/hicolor/scalable/apps/gtop.svg"
+}
